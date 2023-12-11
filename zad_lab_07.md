@@ -96,7 +96,7 @@ where k1.idKreatury = k2.idKreatury - 5;
 select k.rodzaj, avg(e.ilosc * z.waga) from kreatura k
 inner join ekwipunek e on k.idKreatury = e.idKreatury
 inner join zasob z on z.idZasobu = e.idZasobu
-where k.rodzaj not in ('malva','waz') and e.ilosc < 30
+where k.rodzaj not in ('malpa','waz') and e.ilosc < 30
 group by k.rodzaj;
 
 # pkt 2
