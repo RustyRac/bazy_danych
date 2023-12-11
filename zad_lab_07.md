@@ -68,9 +68,58 @@ where idKreatury not in
 # zadanie 4
 ```sql
 #1
-select * from kreatura
-natural join ekwipunek;
+
+select * from ekwipunek;
+select k.nazwa, z.nazwa from kreatura k
+inner join ekwipunek e on k.idKreatury = e.idKreatury
+inner join zasob z on z.idZasobu = e.idZasobu
+where k.rodzaj='wiking' and k.dataUr like '167%';
 
 #2
+
+select * from kreatura;
+select k.nazwa, z.nazwa, k.dataUr from kreatura k
+inner join ekwipunek e on k.idKreatury = e.idKreatury
+inner join zasob z on z.idZasobu = e.idZasobu
+where z.rodzaj='jedzenie' order by k.dataUr desc limit 5;
+
+#3
+
+select concat(k1.nazwa, ' - ', k2.nazwa) from kreatura k1, kreatura k2
+where k1.idKreatury = k2.idKreatury - 5;
+```
+# Zadanie 5
+
+```sql
+# pkt 1
+
+select k.rodzaj, avg(e.ilosc * z.waga) from kreatura k
+inner join ekwipunek e on k.idKreatury = e.idKreatury
+inner join zasob z on z.idZasobu = e.idZasobu
+where k.rodzaj not in ('malva','waz') and e.ilosc < 30
+group by k.rodzaj;
+
+# pkt 2
+
+select a.nazwa, b.rodzaj, b.min, b.max from kreatura a,
+(select rodzaj, min(dataUr) min, max(dataUr) max 
+from kreatura group by rodzaj) as b
+where b.min = a.dataUr or b.max=a.dataUr;
+
+
+
+
+select 'najmlodsza', a.maxData, b.nazwa, a.rodzaj
+from (select max(dataur) maxData, rodzaj from kreatura
+gorup by rodzaj) a,
+(select nazwa dataUr from kreatura) b
+where a.maxData = b.dataUr
+union
+select 'najstarsza', a.minData, b.nazwa, a.rodzaj
+from (select min(dataur) minData, rodzaj from kreatura
+gorup by rodzaj) a,
+(select nazwa dataUr from kreatura) b
+where b.minData = a.dataUr;
+
 
 ```
