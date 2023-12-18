@@ -33,3 +33,68 @@ inner join ekwipunek e on k.idKreatury = e.idKreatury
 group by w.nazwa;
 
 ```
+# Zadanie 2
+```sql
+# pkt 1
+select rodzaj, group_concat(nazwa separator ' ')
+from kreatura group by rodzaj;
+
+select * from uczestnicy;
+
+select w.nazwa, count(distinct k.nazwa) as LiczbaUczestnikow, group_concat(k.nazwa separator ', ') as BioracyUdzial from kreatura k 
+inner join uczestnicy u on k.idKreatury = u.id_uczestnika
+inner join wyprawa w on w.id_wyprawy = u.id_wyprawy
+group by w.nazwa;
+
+# pkt 2
+
+select * from kreatura;
+select * from etapy_wyprawy;
+select * from wyprawa;
+select * from sektor;
+
+select w.nazwa, e.dziennik, s.nazwa, k.nazwa from wyprawy w
+left join ;
+```
+
+# zad 3
+```sql
+# pkt 3
+
+select k.nazwa, count(u.id_wyprawy) from kreatura k
+left join uczestnicy u on u.id_uczestnika=k.idKreatury
+group by k.nazwa;
+
+# pkt 2
+
+select s.id_sektora, if(count(ew.sektor) = 0, 'Nie brał udziału w wyprawie', 'Brał udział w wyprawie') as czy_wyprawa
+from etapy_wyprawy ew
+right join sektor s on ew.sektor=s.id_sektora
+group by s.id_sektora;
+```
+
+# zad 4
+
+```sql
+# pkt 1
+select rodzaj, group_concat(nazwa separator ' ')
+from kreatura group by rodzaj;
+
+select * from uczestnicy;
+
+select w.nazwa, count(distinct k.nazwa) as LiczbaUczestnikow, group_concat(k.nazwa separator ', ') as BioracyUdzial from kreatura k 
+inner join uczestnicy u on k.idKreatury = u.id_uczestnika
+inner join wyprawa w on w.id_wyprawy = u.id_wyprawy
+group by w.nazwa;
+
+# pkt 2
+
+select * from kreatura;
+select * from etapy_wyprawy;
+select * from wyprawa;
+select * from sektor;
+
+select w.nazwa, e.dziennik, s.nazwa, k.nazwa from wyprawy w
+left join ;
+```
+
