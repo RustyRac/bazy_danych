@@ -97,4 +97,12 @@ select * from sektor;
 select w.nazwa, e.dziennik, s.nazwa, k.nazwa from wyprawy w
 left join ;
 ```
+# zad 5
 
+```sql
+select k.nazwa, datediff(w.data_rozpoczecia,k.dataUr) as 'Wiek w dniach' from kreatura k
+inner join uczestnicy u on u.id_uczestnika=k.idKreatury
+inner join etapy_wyprawy ew on u.id_wyprawy=ew.idWyprawy
+inner join wyprawa w on w.id_wyprawy=u.id_wyprawy
+where ew.sektor=7;
+```
