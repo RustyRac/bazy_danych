@@ -1,4 +1,4 @@
-# Zadania
+# Zadania 1 
 ```sql
 # zad 1
 select imie, nazwisko, data_urodzenia from __firma_zti.pracownik;
@@ -57,5 +57,48 @@ inner join __firma_zti.pracownik p on p.id_pracownika=z.pracownik_id_pracownika
 group by p.id_pracownika
 order by wartosc desc;
 ```
+# Zadania 2
 
+```sql
+
+# zad 1 
+
+select d.nazwa, min(p.pensja), max(p.pensja), avg(p.pensja) from__firma_zti.pracownik p
+inner join __firma_zti.dzial d on p.dzial=d.id_dzialu
+group by d.id_dzialu;
+
+# zad 2
+
+select k.pelna_nazwa, sum(pz.ilosc * pz.cena) as wartosc from __firma_zti.zamowienie z
+inner join __firma_zti.pozycja_zamowienia pz on z.id_zamowienia=pz.zamowienie
+inner join __firma_zti.klient k on k.id_klienta=z.klient
+group by z.id_zamowienia
+order by wartosc desc limit 10;
+
+# zad 3
+
+select sum(pz.cena * pz.ilosc) as przychod, year(z.data_zamowienia) as rok from __firma_zti.pozycja_zamowienia pz
+inner join __firma_zti.zamowienie z on pz.zamowienie=z.id_zamowienia
+group by year(z.data_zamowienia)
+order by przychod desc;
+
+# zad 7
+
+select sum(pz.cena * pz.ilosc - t.cena_zakupu * pz.ilosc) as "dochód", year(z.data_zamowienia) from __firma_zti.pozycja_zamowienia pz
+inner join __firma_zti.zamowienie z on pz.zamowienie=z.id_zamowienia
+inner join __firma_zti.towar t on pz.towar= t.id_towaru
+group by year(z.data_zamowienia);
+
+
+
+
+
+
+
+
+
+
+
+
+```
 
